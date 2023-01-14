@@ -5,6 +5,9 @@ const axios = require("axios");
 const app = express();
 const { resolve } = require("path");
 const fs = require("fs");
+app.use(express.json());
+const httpServer = createServer(app);
+const io = new Server(httpServer, {});
 
 io.on("connection", (socket) => {
     console.log("Connection !");
