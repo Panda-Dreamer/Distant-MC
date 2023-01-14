@@ -24,4 +24,4 @@ io.on("connection", (socket) => {
     const statusFile = JSON.parse(fs.readFileSync("./files/status.json", "utf8"));
     io.sockets.in("update").emit("status", {progress:text,lastUpdate:`Last update: ${new Date(statusFile.lastPricesUpdate).toLocaleString()}`});
   }
-  httpServer.listen(3000);
+  httpServer.listen(5000);
