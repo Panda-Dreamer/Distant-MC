@@ -5,9 +5,10 @@ const wss = new WebSocketServer({ port: 5001 });
 
 const express = require("express");
 const { createServer } = require("http");
-app.use(express.json());
 const httpServer = createServer(app);
 const app = express();
+app.use(express.json());
+
 
 wss.on('connection', function connection(ws) {
   console.log("Connection ! ")
