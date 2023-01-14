@@ -20,7 +20,7 @@ wss.on('connection', function connection(ws) {
 });
 
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "page.html");
+    res.sendFile(__dirname + "/page.html");
 });
   
 httpServer.listen(5000);
