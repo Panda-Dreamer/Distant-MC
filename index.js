@@ -5,8 +5,8 @@ const wss = new WebSocketServer({ port: 5001 });
 
 const express = require("express");
 const { createServer } = require("http");
-const httpServer = createServer(app);
 const app = express();
+const httpServer = createServer(app);
 app.use(express.json());
 
 
