@@ -81,7 +81,8 @@ wss.on('connection', function connection(ws) {
       Drop list:
       ${list}
       
-      Session length: ${(new Date().getTime() - sessions[ws].getTime())/60000}min`
+      Session length: ${(new Date().getTime() - sessions[ws].getTime())/60000}min
+      @here`
       
       
     })
