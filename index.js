@@ -67,8 +67,15 @@ wss.on('connection', function connection(ws) {
       drops[ws] = {}
       sendMessage(config.url,{content:`${sockets[ws]} just started a session, drops count reset !`})
     }else if(id == "sessionEnd"){
+      list = ""
+      Object.keys(drops[ws]).forEach(item=>{
+          list+=`- **${item}**: ${drops[ws][item]}`
+      })
       drops[ws] = {}
-      sendMessage(config.url,{content:`${sockets[ws]} just stopped a session, drops count reset !`})
+      sendMessage(config.url,{content:`${sockets[ws]} just stopped a session, drops count reset !
+      
+      Drop list:
+      ${list}`})
     }
   });
   ws.send('something');
