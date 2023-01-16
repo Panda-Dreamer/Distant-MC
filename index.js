@@ -14,7 +14,7 @@ app.use(express.json());
 wss.on('connection', function connection(ws) {
   console.log("Connection ! ")
   ws.on('message', function message(data) {
-    console.log(data,type(data))
+    console.log(data,typeof(data))
     channel = data.split("[CHANNEL]")[0]
     if(channel == "WEBHOOK"){
       sendMessage(config.url,data.split("[CHANNEL]")[1])
