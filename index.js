@@ -5,6 +5,7 @@ const config = require("./config.json")
 
 const express = require("express");
 const { createServer } = require("http");
+const { type } = require('os');
 const app = express();
 const httpServer = createServer(app);
 app.use(express.json());
@@ -13,8 +14,7 @@ app.use(express.json());
 wss.on('connection', function connection(ws) {
   console.log("Connection ! ")
   ws.on('message', function message(data) {
-    console.log(data)
-    console.log(Buffer.from(data, 'base64').toString())
+    console.log(data,type(data))
     channel = data.split("[CHANNEL]")[0]
     if(channel == "WEBHOOK"){
       sendMessage(config.url,data.split("[CHANNEL]")[1])
