@@ -28,7 +28,7 @@ wss.on('connection', function connection(ws) {
     id = data.toString().split("$$$")[0]
     data = data.toString().split("$$$")[1]
     console.log(id,data)
-    if(id == "WEBHOOK"){
+    if(id == "webhook"){
       sendMessage(config.url,{content:data})
     }else if(id == "join"){
       sockets[ws] = data
