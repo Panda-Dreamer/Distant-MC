@@ -25,14 +25,14 @@ drops = {
 wss.on('connection', function connection(ws) {
   console.log("Connection ! ")
   ws.on('message', function message(data) {
-    channel = data.toString().split("$$$")[0]
+    id = data.toString().split("$$$")[0]
     data = data.toString().split("$$$")[1]
-    if(channel == "WEBHOOK"){
+    if(id == "WEBHOOK"){
       sendMessage(config.url,{content:data})
-    }else if(channel == "join"){
+    }else if(id == "join"){
       sockets[ws] = data
       
-    }else if(channel == "item"){
+    }else if(id == "item"){
       if(drops[ws] == undefined){
         drops[ws] = {}
       }
