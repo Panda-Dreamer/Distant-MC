@@ -12,7 +12,9 @@ const httpServer = createServer(app);
 app.use(express.json());
 
 
+sessions = {
 
+}
 
 
 sockets = {
@@ -65,17 +67,24 @@ wss.on('connection', function connection(ws) {
       })
     }else if(id == "sessionStart"){
       drops[ws] = {}
+      sessions[ws] = new Date()
       sendMessage(config.url,{content:`${sockets[ws]} just started a session, drops count reset !`})
     }else if(id == "sessionEnd"){
       list = ""
       Object.keys(drops[ws]).forEach(item=>{
-          list+=`- **${item}**: ${drops[ws][item]}`
+          list+=`- **${item}**: ${drops[ws][item]}\n`
       })
       drops[ws] = {}
+      
       sendMessage(config.url,{content:`${sockets[ws]} just stopped a session, drops count reset !
       
       Drop list:
-      ${list}`})
+      ${list}
+      
+      Session length: ${(new Date().getTime() - sessions[ws].getTime())/60000}min`
+      
+      
+    })
     }
   });
   ws.send('something');
