@@ -27,22 +27,23 @@ drops = {
 wss.on('connection', function connection(ws) {
   console.log("Connection ! ")
   ws.on('message', function message(data) {
-    id = data.toString().split("$$$")[0]
-    data = data.toString().split("$$$")[1]
+    user = data.toString().split("$$$")[0]
+    id = data.toString().split("$$$")[1]
+    data = data.toString().split("$$$")[2]
     console.log(id,data)
     if(id == "webhook"){
       sendMessage(config.url,{content:data})
     }else if(id == "join"){
-      sockets[ws] = data
+      sockets[user] = data
       
     }else if(id == "item"){
-      if(drops[ws] == undefined){
-        drops[ws] = {}
+      if(drops[user] == undefined){
+        drops[user] = {}
       }
-      if(drops[ws][data] == undefined){
-        drops[ws][data] = 0
+      if(drops[user][data] == undefined){
+        drops[user][data] = 0
       }
-      drops[ws][data] += 1
+      drops[user][data] += 1
 
       sendMessage(config.url,{
         "username": "Glacite farming",
@@ -52,7 +53,7 @@ wss.on('connection', function connection(ws) {
           {
             "title": "RARE DROP",
             "color": 50421,
-            "description": `${sockets[ws]} just dropped ${data}\n\nTimes dropped during the session: ${drops[ws][data]} `,
+            "description": `${sockets[user]} just dropped ${data}\n\nTimes dropped during the session: ${drops[user][data]} `,
             "timestamp": "",
             "author": {
               "name": ""
@@ -66,22 +67,22 @@ wss.on('connection', function connection(ws) {
         "components": []
       })
     }else if(id == "sessionStart"){
-      drops[ws] = {}
-      sessions[ws] = new Date()
-      sendMessage(config.url,{content:`${sockets[ws]} just started a session, drops count reset !`})
+      drops[user] = {}
+      sessions[user] = new Date()
+      sendMessage(config.url,{content:`${sockets[user]} just started a session, drops count reset !`})
     }else if(id == "sessionEnd"){
       list = ""
-      Object.keys(drops[ws]).forEach(item=>{
-          list+=`- **${item}**: ${drops[ws][item]}\n`
+      Object.keys(drops[user]).forEach(item=>{
+          list+=`- **${item}**: ${drops[user][item]}\n`
       })
-      drops[ws] = {}
+      drops[user] = {}
       
-      sendMessage(config.url,{content:`${sockets[ws]} just stopped a session, drops count reset !
+      sendMessage(config.url,{content:`${sockets[user]} just stopped a session, drops count reset !
       
       Drop list:
       ${list}
       
-      Session length: ${(new Date().getTime() - sessions[ws].getTime())/60000}min
+      Session length: ${(new Date().getTime() - sessions[user].getTime())/60000}min
       @here`
       
       
