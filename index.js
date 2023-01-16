@@ -13,10 +13,10 @@ app.use(express.json());
 wss.on('connection', function connection(ws) {
   console.log("Connection ! ")
   ws.on('message', function message(data) {
-    console.log('received: %s', data);
-  });
-  ws.on('webhook', function message(data) {
-    sendMessage(config.url,data)
+    channel = data.split("[CHANNEL]")[0]
+    if(channel == "WEBHOOK"){
+      sendMessage(config.url,data.split("[CHANNEL]")[1])
+    }
   });
   ws.send('something');
 });
