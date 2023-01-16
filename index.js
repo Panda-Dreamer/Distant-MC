@@ -1,7 +1,7 @@
 const { WebSocketServer } = require('ws');
 const wss = new WebSocketServer({ port: 5001 });
 const axios = require("axios")
-
+const config = require("./config.json")
 
 const express = require("express");
 const { createServer } = require("http");
@@ -16,7 +16,7 @@ wss.on('connection', function connection(ws) {
     console.log('received: %s', data);
   });
   ws.on('webhook', function message(data) {
-    sendMessage("https://discord.com/api/webhooks/1064275921462382642/O9KMso7-Pa9hWrYll8b6SfyNN5zqM9acCK5CBTacLow3xsfEXF5rAF5ZiQpIaLh4ZIFr",data)
+    sendMessage(config.url,data)
   });
   ws.send('something');
 });
