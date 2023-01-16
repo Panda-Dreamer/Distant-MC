@@ -65,6 +65,9 @@ wss.on('connection', function connection(ws) {
     }else if(channel == "sessionStart"){
       drops[ws] = {}
       sendMessage(config.url,{content:`${sockets[ws]} just started a session, drops count reset !`})
+    }else if(channel == "sessionEnd"){
+      drops[ws] = {}
+      sendMessage(config.url,{content:`${sockets[ws]} just stopped a session, drops count reset !`})
     }
   });
   ws.send('something');
