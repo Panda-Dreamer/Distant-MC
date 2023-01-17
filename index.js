@@ -71,7 +71,14 @@ wss.on('connection', function connection(ws) {
       sessions[user] = new Date()
       sendMessage(config.url,{content:`${sockets[user]} just started a session, drops count reset !`})
     }else if(id == "sessionEnd"){
-      seconds = (new Date().getTime() - sessions[user].getTime())
+      seconds = (new Date().getTime() - sessions[user].getTime())/1000
+      hours = Math.floor(seconds/3600)
+      seconds = seconds % 3600;
+
+      minutes = Math.floor(seconds/60)
+      seconds = Math.floor(seconds % 60)
+
+      time = `${hours}h ${minutes}m ${seconds}s`
       list = ""
       Object.keys(drops[user]).forEach(item=>{
           list+=`- **${item}**: ${drops[user][item]}\n`
@@ -83,7 +90,7 @@ wss.on('connection', function connection(ws) {
       Drop list:
 ${list}
       
-      Session length: ${new Date(null).setSeconds(seconds).toISOString().slice(11, 19)}
+      Session length: ${time}
       ${getPing(user)}`
       
       
