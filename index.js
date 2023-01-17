@@ -83,7 +83,7 @@ wss.on('connection', function connection(ws) {
       Drop list:
 ${list}
       
-      Session length: ${new Date(seconds * 1000).toISOString().slice(11, 19)}
+      Session length: ${new Date(null).setSeconds(seconds).toISOString().slice(11, 19)}
       ${getPing(user)}`
       
       
