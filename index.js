@@ -89,6 +89,8 @@ ${list}
     })
     }else if(id == "disconnect"){
       sendMessage(config.url,{content:`${sockets[user]} just got disconnected ! ${getPing(user)}`})
+    }else if(id == "death"){
+      sendMessage(config.url,{content:`${sockets[user]} just got bozoed ! ${getPing(user)}`})
     }
   });
   ws.send('something');
