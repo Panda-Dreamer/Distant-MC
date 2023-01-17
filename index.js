@@ -80,17 +80,27 @@ wss.on('connection', function connection(ws) {
       sendMessage(config.url,{content:`${sockets[user]} just stopped a session, drops count reset !
       
       Drop list:
-      ${list}
+${list}
       
       Session length: ${(new Date().getTime() - sessions[user].getTime())/60000}min
-      @here`
+      ${getPing(user)}`
       
       
     })
+    }else if(id == "disconnect"){
+      sendMessage(config.url,{content:`${sockets[user]} just got disconnected ! ${getPing(user)}`})
     }
   });
   ws.send('something');
 });
+
+function getPing(username){
+  table = {
+    "omega7707":"<@448812656304848906>",
+    "game602":"<@600630149167185950>"
+  }
+  return table[username.toLowerCase()]
+}
 
 app.get("/", (req, res) => {
     res.sendFile(__dirname + "/page.html");
