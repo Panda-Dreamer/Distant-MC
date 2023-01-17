@@ -95,6 +95,7 @@ ${list}
 });
 
 function getPing(username){
+  console.log(username)
   table = {
     "omega7707":"<@448812656304848906>",
     "game602":"<@600630149167185950>"
