@@ -24,7 +24,7 @@
       <br />
       <h3>Chat</h3>
       <div class="chat" id="chat"style="width: 1000px; height: 500px; background-color: rgb(27, 44, 44); color: white"></div>
-      <input style="width: 700px; margin-right: 8px" id="chatMSG"/><button onclick="sendChat()">Send</button><button onclick="clearChat()">Send</button>
+      <input style="width: 700px; margin-right: 8px" id="chatMSG"/><button onclick="sendChat()">Send</button><button onclick="clearChat()">Clear</button>
       <br />
     </div>
 
@@ -39,7 +39,7 @@
         
       });
       socket.on("chat", async (data) => {
-        document.getElementById("chat").innerHTML += `\n${data}`
+        document.getElementById("chat").innerHTML += `<br>${data}`
       });
       socket.on("information", async (data) => {
         document.getElementById("username").innerHTML = `User: ${data.user}`
