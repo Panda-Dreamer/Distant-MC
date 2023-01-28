@@ -1,19 +1,53 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Omega's account controller</title>
-</head>
-<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js"></script>
+  </head>
+  <body style="color: white; background-color: darkslategrey">
+    <style>
+      div {
+        border-radius: 5px;
+      }
+    </style>
     <h1>Controller [WIP]</h1>
     <div>
-        <div>
-            
-        </div>
+      <h3>Information</h3>
+      <div class="info" style="width: 300px; background-color: rgb(27, 44, 44); color: white">
+        <label>Position: </label><br />
+        <label>Lobby: </label><br>
+        <label id="username">User: </label>
+      </div>
+      <br />
+      <h3>Chat</h3>
+      <div class="chat" id="chat"style="width: 1000px; height: 500px; background-color: rgb(27, 44, 44); color: white"></div>
+      <input style="width: 700px; margin-right: 8px" id="chatMSG"/><button onclick="sendChat()">Send</button>
+      <br />
     </div>
-</body>
+
+    <script>
+      var socket;
+      if (document.URL.includes("localhost")) {
+        socket = io("localhost:5001");
+      } else {
+        socket = io("129.151.66.228:5001");
+      }
+      socket.on("update", async (data) => {
+        
+      });
+      socket.on("chat", async (data) => {
+        document.getElementById("chat").innerHTML += `\n${data}`
+      });
+      socket.on("information", async (data) => {
+        document.getElementById("username").innerHTML = `User: ${data.user}`
+      });
+
+      function sendChat(){
+        socket.emit("chat",document.getElementById("chatMSG").value)
+      }
+    </script>
+  </body>
 </html>
