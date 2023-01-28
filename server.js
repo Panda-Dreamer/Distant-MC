@@ -14,7 +14,7 @@ app.use(express.json());
 session = ""
 
 const httpServer2 = require("http").createServer();
-const io = require("socket.io")(httpServer2, {
+const io = require("socket.io")(httpServer, {
 });
 
 
@@ -54,5 +54,5 @@ app.get("/", (req, res) => {
 });
   
 
-httpServer2.listen(5003)
+//httpServer2.listen(5003)
 httpServer.listen(5001)
