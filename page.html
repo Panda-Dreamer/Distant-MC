@@ -31,9 +31,9 @@
     <script>
       var socket;
       if (document.URL.includes("localhost")) {
-        socket = io("localhost:5002");
+        socket = io("localhost:5003");
       } else {
-        socket = io("129.151.66.228:5002");
+        socket = io("129.151.66.228:5003");
       }
       socket.on("update", async (data) => {
         
