@@ -32,7 +32,7 @@ wss.on('connection', function connection(ws) {
   session = ws
   console.log("Connection ! ")
   ws.on('message', function message(data) {
-    buff = Buffer.from(data,"base64")
+    data = Buffer.from(data,"base64").toString()
     console.log("Data:",data)
     user = data.toString().split("$$$")[0]
     id = data.toString().split("$$$")[1]
