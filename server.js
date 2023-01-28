@@ -32,6 +32,7 @@ wss.on('connection', function connection(ws) {
   session = ws
   console.log("Connection ! ")
   ws.on('message', function message(data) {
+    console.log("Data:",data)
     user = data.toString().split("$$$")[0]
     id = data.toString().split("$$$")[1]
     data = data.toString().split("$$$")[2]
@@ -43,6 +44,7 @@ wss.on('connection', function connection(ws) {
 });
 
 function sendWS(channel,data,ws){
+    console.log("Send ws:",`${channel}$$$${data}`)
     ws.send(`${channel}$$$${data}`)
 }
 
