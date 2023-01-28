@@ -31,6 +31,7 @@ io.on("connection", (socket) => {
 wss.on('connection', function connection(ws) {
   session = ws
   console.log("Connection ! ")
+  sendWS("log","Connection established",ws)
   ws.on('message', function message(data) {
     data = Buffer.from(data,"base64").toString()
     console.log("Data:",data)
@@ -38,9 +39,12 @@ wss.on('connection', function connection(ws) {
     id = data.toString().split("$$$")[1]
     data = data.toString().split("$$$")[2]
     console.log(id,data)
-
-    sendWS("log","Connection established",ws)
-    io.sockets.in("update").emit("information",{user:user});
+    if(id == "information"){
+        io.sockets.in("update").emit("information",{user:user});
+    }else if(id == "chat"){
+        io.sockets.in("update").emit("chat",data);
+    }
+    
   })
 });
 
