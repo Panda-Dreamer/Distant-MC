@@ -1,5 +1,5 @@
 const { WebSocketServer } = require('ws');
-const wss = new WebSocketServer({ port: 5001 });
+const wss = new WebSocketServer({ port: 5002 });
 const axios = require("axios")
 const config = require("./config.json")
 
