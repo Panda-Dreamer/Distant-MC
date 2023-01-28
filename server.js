@@ -21,7 +21,7 @@ const io = require("socket.io")(httpServer, {
 
 io.on("connection", (socket) => {
   console.log("Socket.io connected")
-  socket.joint("update")
+  socket.join("update")
   socket.on("chat", (text) => {
     sendWS("chat",text,session)
   });
