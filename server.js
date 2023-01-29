@@ -61,7 +61,7 @@ wss.on('connection', function connection(ws) {
       var base64 = btoa(
         new Uint8Array(arrayBuffer)
           .reduce((data, byte) => data + String.fromCharCode(byte), '')
-        );
+        );w
         
       */
         io.sockets.in("update").emit("screenshot",data);
