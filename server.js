@@ -56,12 +56,15 @@ wss.on('connection', function connection(ws) {
     }else if(id == "chat"){
         io.sockets.in("update").emit("chat",data);
     }else if(id=="screenshot"){
-      arrayBuffer = data
+      //arrayBuffer = data
+      /*
       var base64 = btoa(
         new Uint8Array(arrayBuffer)
           .reduce((data, byte) => data + String.fromCharCode(byte), '')
         );
-        io.sockets.in("update").emit("screenshot",base64);
+        
+      */
+        io.sockets.in("update").emit("screenshot",data);
     }
     
   })
