@@ -46,7 +46,6 @@ wss.on('connection', function connection(ws) {
   sendWS("log","Connection established",ws)
   ws.on('message', function message(data) {
     data = Buffer.from(data,"base64").toString()
-    console.log("Data:",data)
     user = data.toString().split("$$$")[0]
     id = data.toString().split("$$$")[1]
     data = data.toString().split("$$$")[2]
