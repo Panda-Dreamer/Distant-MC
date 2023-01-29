@@ -50,7 +50,7 @@ wss.on('connection', function connection(ws) {
     user = data.toString().split("$$$")[0]
     id = data.toString().split("$$$")[1]
     data = data.toString().split("$$$")[2]
-    console.log(id,data)
+    console.log(id)
     if(id == "information"){
         io.sockets.in("update").emit("information",{user:user});
     }else if(id == "chat"){
