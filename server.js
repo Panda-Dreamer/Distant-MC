@@ -31,6 +31,12 @@ io.on("connection", (socket) => {
   socket.on("PlayerDisconnect", (text) => {
     sendWS("disconnect"," ",session)
   });
+  socket.on("screenshot", (text) => {
+    sendWS("screenshot"," ",session)
+  });
+  socket.on("keybind", (text) => {
+    sendWS("keybind",text,session)
+  });
 });
 
 
@@ -49,6 +55,13 @@ wss.on('connection', function connection(ws) {
         io.sockets.in("update").emit("information",{user:user});
     }else if(id == "chat"){
         io.sockets.in("update").emit("chat",data);
+    }else if(id=="screenshot"){
+      arrayBuffer = data
+      var base64 = btoa(
+        new Uint8Array(arrayBuffer)
+          .reduce((data, byte) => data + String.fromCharCode(byte), '')
+        );
+        io.sockets.in("update").emit("screenshot",base64);
     }
     
   })

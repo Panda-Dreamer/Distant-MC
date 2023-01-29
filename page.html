@@ -24,9 +24,17 @@
       </div>
       <br />
       <h3>Chat</h3>
-      <div class="chat" id="chat"style="width: 1000px; height: 500px; background-color: rgb(27, 44, 44); color: white; overflow:auto"></div>
+      <div class="chat" id="chat"style="width: 1500px; height: 500px; background-color: rgb(27, 44, 44); color: white; overflow:auto"></div>
       <input style="width: 700px; margin-right: 8px" id="chatMSG"/><button onclick="sendChat()">Send</button><button onclick="clearChat()">Clear</button>
       <br />
+      <div style="width: 500px; height: 500px; background-color: rgb(27, 44, 44); color: white; overflow:auto">
+        <button onclick="screenshot()">screenshot</button>
+        <br>
+        <br>
+        <button onclick="keybind('move.forward')">forward</button><button onclick="keybind('move.backward')">backward</button><br>
+        <button onclick="keybind('move.left')">left</button><button onclick="keybind('move.right')">right</button>
+        <img alt="screenshot img" id="screen">
+      </div>
     </div>
 
     <script>
@@ -45,7 +53,10 @@
       socket.on("information", async (data) => {
         document.getElementById("username").innerHTML = `User: ${data.user}`
       });
-
+      socket.on("screenshot", async (data) => {
+        document.getElementById("screen").setAttribute("src",`data:image/png;base64,${data}`);
+        console.log(data)
+      });
       function sendChat(){
         socket.emit("chat",document.getElementById("chatMSG").value)
       }
@@ -57,6 +68,12 @@
       }
       function disconnect(){
         socket.emit("PlayerDisconnect","")
+      }
+      function keybind(key){
+        socket.emit("keybind",key)
+      }
+      function screenshot(){
+        socket.emit("screenshot","")
       }
     </script>
   </body>
