@@ -25,10 +25,10 @@ io.on("connection", (socket) => {
   socket.on("chat", (text) => {
     sendWS("chat",text,session)
   });
-  socket.on("connect", (text) => {
+  socket.on("PlayerConnect", (text) => {
     sendWS("connect",text,session)
   });
-  socket.on("disconnect", (text) => {
+  socket.on("PlayerDisconnect", (text) => {
     sendWS("disconnect"," ",session)
   });
 });

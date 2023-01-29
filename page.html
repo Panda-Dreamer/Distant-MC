@@ -16,10 +16,10 @@
     <h1>Controller [WIP]</h1>
     <div>
       <h3>Information</h3>
-      <div class="info" style="width: 300px; background-color: rgb(27, 44, 44); color: white">
+      <div class="info" style="width: 500px; background-color: rgb(27, 44, 44); color: white">
         <label>Position: </label><br />
         <label>Lobby: </label><br>
-        <label id="username">User: </label>
+        <label id="username">User: </label><br>
         <input id="IP"><button id="connect" onclick="connect()">Connect</button><button id="disconnect" onclick="disconnect()">Disconnect</button>
       </div>
       <br />
@@ -53,10 +53,10 @@
         document.getElementById("chat").innerHTML = ""
       }
       function connect(){
-        socket.emit("connect",document.getElementById("IP").value)
+        socket.emit("PlayerConnect",document.getElementById("IP").value)
       }
       function disconnect(){
-        socket.emit("disconnect","")
+        socket.emit("PlayerDisconnect","")
       }
     </script>
   </body>
